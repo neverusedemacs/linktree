@@ -37,7 +37,7 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" -backend-config="key=${{ secrets.TERRAFORM_BACKEND_KEY }}" -backend-config="region=secrets.AWS_REGION"
+      run: terraform init -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" -backend-config="key=${{ secrets.TERRAFORM_BACKEND_KEY }}" -backend-config="region=${{ secrets.AWS_REGION }}"
 
 
 
