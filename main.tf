@@ -45,9 +45,9 @@ resource "aws_s3_object" "linktree_css" {
 }
 
 resource "aws_s3_object" "linktree_assets" {
-  for_each = fileset(path.module, "source/assets/*")
-  bucket = aws_s3_bucket.assets.bucket
-  key    = trim(each.value, "source/")
+  for_each    = fileset(path.module, "source/assets/*")
+  bucket      = aws_s3_bucket.assets.bucket
+  key         = trim(each.value, "source/")
   source_hash = filemd5(each.value)
 }
 
