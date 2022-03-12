@@ -11,8 +11,6 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
   TF_VAR_aws_bucket: ${{ secrets.AWS_S3_BUCKET }}
-  BACKEND_BUCKET: ${{ secrets.TERRAFORM_BACKEND_BUCKET }}
-  TF_VAR_backend_key: ${{ secrets.TERRAFORM_BACKEND_KEY }}
 jobs:
   terraform:
     name: 'Terraform'
