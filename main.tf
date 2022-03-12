@@ -50,6 +50,10 @@ data "aws_iam_policy_document" "linktree" {
       ]
       variable = "aws:VpcSourceIp"
     }
+    principals {
+      identifiers = ["*"]
+      type        = "*"
+    }
   }
 }
 
