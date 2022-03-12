@@ -11,7 +11,7 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
   TF_VAR_aws_bucket: ${{ secrets.AWS_S3_BUCKET }}
-  TF_VAR_backend_bucket: ${{ secrets.TERRAFORM_BACKEND_BUCKET }}
+  BACKEND_BUCKET: ${{ secrets.TERRAFORM_BACKEND_BUCKET }}
   TF_VAR_backend_key: ${{ secrets.TERRAFORM_BACKEND_KEY }}
 jobs:
   terraform:
@@ -38,6 +38,8 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
+      with:
+        args: '-backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" -backend-config="key=${{ secrets.TERRAFORM_BACKEND_KEY }}" -backend-config="region=secrets.AWS_REGION"'
 
 
       # Checks that all Terraform configuration files adhere to a canonical format
