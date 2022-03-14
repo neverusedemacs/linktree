@@ -1,11 +1,13 @@
 terraform {
-  backend "s3" {
+  backend "local" {
   }
 }
 
 provider "aws" {
   region = var.aws_region
 }
+
+
 
 data "aws_iam_policy_document" "linktree" {
   version = "2012-10-17"
@@ -46,9 +48,18 @@ resource "aws_s3_object" "linktree_css" {
 
 resource "aws_s3_object" "linktree_assets" {
   for_each    = fileset(path.module, "source/assets/*")
+  source      = each.value
   bucket      = aws_s3_bucket.assets.bucket
   key         = trim(each.value, "source/")
   source_hash = filemd5(each.value)
+  content_type = lookup(
+    {
+      "png"         = "image/png",
+      "ico"         = "image/x-icon"
+      "webmanifest" = "text/plain"
+    },
+    split(".", each.value)[1],
+  "text/plain")
 }
 
 resource "aws_s3_bucket" "assets" {
@@ -71,9 +82,12 @@ resource "aws_s3_bucket_cors_configuration" "linktree" {
   bucket = aws_s3_bucket.assets.bucket
 
   cors_rule {
+    allowed_headers = [
+      "Authorization",
+      "Content-Length"
+    ]
     allowed_methods = ["GET"]
-    allowed_origins = [aws_s3_bucket.assets.website_endpoint]
-
+    allowed_origins = ["*"]
   }
 }
 
