@@ -12,7 +12,9 @@ We have github actions in the background listening for events pushed to the main
 
 ### AWS
 
-We need to create a policy that allows github to make changes to
+We need to create a policy that allows github to make changes to your aws account. We will go with the policy of least privilege. Here are the services we need access to and the changes we need to make
+
+
 
 ### Github
 
