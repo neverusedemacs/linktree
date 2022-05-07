@@ -8,7 +8,17 @@ I wanted a linktree like page but with my own domain and automated deployment wi
 
 We have github actions in the background listening for events pushed to the main branch, when you make a push it will deploy the infrastructure. 
 
+## How to get started
 
+### AWS
+
+We need to create a policy that allows github to make changes to
+
+### Github
+
+Clone the repository and there's a few values to change.
+
+### Cloudflare
 
 ## Thanks
 
