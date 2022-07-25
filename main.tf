@@ -54,24 +54,24 @@ resource "aws_s3_bucket_policy" "linktree" {
 resource "aws_s3_object" "linktree_html" {
   bucket       = aws_s3_bucket.assets.bucket
   key          = "index.html"
-  source       = "source/index.html"
+  source       = "ak/index.html"
   content_type = "text/html"
-  source_hash  = filemd5("source/index.html")
+  source_hash  = filemd5("ak/index.html")
 }
 
 resource "aws_s3_object" "linktree_css" {
   bucket       = aws_s3_bucket.assets.bucket
   key          = "style.css"
-  source       = "source/style.css"
+  source       = "ak/style.css"
   content_type = "text/css"
-  source_hash  = filemd5("source/style.css")
+  source_hash  = filemd5("ak/style.css")
 }
 
 resource "aws_s3_object" "linktree_assets" {
-  for_each    = fileset(path.module, "source/assets/*")
+  for_each    = fileset(path.module, "ak/assets/*")
   source      = each.value
   bucket      = aws_s3_bucket.assets.bucket
-  key         = trim(each.value, "source/")
+  key         = trim(each.value, "ak/")
   source_hash = filemd5(each.value)
   content_type = lookup(
     {

@@ -90,10 +90,10 @@ On line 70 - 84
 
 ```terraform
 resource "aws_s3_object" "linktree_assets" {
-  for_each     = fileset(path.module, "source/assets/*")
+  for_each     = fileset(path.module, "ak/assets/*")
   source       = each.value
   bucket       = aws_s3_bucket.assets.bucket
-  key          = trim(each.value, "source/")
+  key          = trim(each.value, "ak/")
   source_hash  = filemd5(each.value)
   content_type = lookup(
     {
