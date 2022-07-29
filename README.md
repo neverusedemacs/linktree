@@ -162,6 +162,14 @@ You can find the full bucket name going into the amazon console after you deploy
 - Scroll down to Static Website Hosting on the bottom of the page
 - Your bucket name is the Bucket Website Endpoint minus the `http://`
 
+
+### Notes
+
+Ran into an issue that took way too long to figure out on my end. The [trim function](https://www.terraform.io/language/functions/trim) in terraform is used to structure the s3 bucket.
+We put all the files in a directory and on S3 we remove that file name to structure the project. Only problem is in the finer details. On the documentation it mentions "trim removes the specified set of characters from the start and end of the given string.".
+
+So what does this mean? Originally I had all the files in a directory called "source", trim will remove any characters (aka, 's','o','u','r','c','e') from the beginning and end of the file names, so .js files now became .j files. .ico files became .i, etc.  
+
 ## Thanks
 
 Shoutout to [Sylwia Vargas](https://github.com/sylwiavargas/Tech-Writing-Linktree) for the base code
